@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.text.BreakIterator;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
                 double resta = n1 - n2;
 
+                BreakIterator precio;
                 precio.setText(String.valueOf(resta));
 
             }
