@@ -2,6 +2,7 @@ package com.example.a00_basicapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,11 +12,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.a00_basicapp.entidad.User;
+
 public class MainActivity extends AppCompatActivity {
 
     Button buttonLogIn;
     Button buttonAbout;
     Button buttonNewUser;
+    public static final String K_USER = "user";
+    User u;
 
 
     @Override
@@ -29,6 +34,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        u = new User();
+
+        u = (User)getIntent().getSerializableExtra(K_USER);
+
+        if(u != null){
+            Log.i("Usuario_MainActivity",u.toString());
+        }
+
 
         buttonLogIn = findViewById(R.id.mainLogIn);
         buttonAbout = findViewById(R.id.mainAbout);
@@ -51,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void newUser(View view) {
         Intent intent = new Intent(this, NewUser.class);
+        if(u != null){
+            Log.i("Usuario",u.toString());
+        }
         startActivity(intent);
     }
 
@@ -61,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view){
         Intent intent = new Intent(this, LogIn.class);
+        intent.putExtra(K_USER,u);
+        if(u != null){
+            Log.i("Usuario",u.toString());
+        }
         startActivity(intent);
 
     }

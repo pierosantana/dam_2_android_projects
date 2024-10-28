@@ -1,6 +1,7 @@
 package com.example.a00_basicapp;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -33,6 +34,8 @@ public class NewUser extends AppCompatActivity {
     Button buttonCreateUser;
 
     User u;
+
+    public static final String K_USER = "user";
 
 
     @Override
@@ -84,48 +87,78 @@ public class NewUser extends AppCompatActivity {
         String password = userPassword.getText().toString().trim();
         String repeatPassword = userRepeatPassword.getText().toString().trim();
 
-        if(!name.isBlank()){
-            u.setName(name);
-            if(!username.isBlank()){
-                u.setUsername(username);
-                if(!email.isBlank() &&
-                        Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-                    u.setEmail(email);
-                    if(!country.isBlank()){
-                        u.setCountry(country);
-                        if(!city.isBlank()){
-                            u.setCity(city);
-                            if (!password.isBlank() && !repeatPassword.isBlank()){
-                                if(password.equals(repeatPassword)){
-                                    u.setPassword(password);
-                                    if (checkTerms.isChecked()) {
-                                        alertDialog("", "User created");
-                                        Log.i("Usuario",u.toString());
-                                    } else {
-                                        alertDialog("Error", "You must accept the Terms and Conditions.");
-                                    }
-                                } else {
-                                    alertDialog("Error", "Passwords do not match.");
-                                }
-
-                            } else {
-                                alertDialog("Error", "Password cannot be empty.");
-                            }
-                        } else {
-                            alertDialog("Error", "City cannot be empty.");
-                        }
-                    } else {
-                        alertDialog("Error", "Country cannot be empty.");
-                    }
-                } else {
-                    alertDialog("Error", "Invalid email or cannot be empty.");
-                }
-            } else {
-                alertDialog("Error", "Username cannot be empty.");
-            }
-        } else {
+        // Validaciones
+        if (name.isBlank()) {
             alertDialog("Error", "Name cannot be empty.");
+            return;
         }
+
+        if (username.isBlank()) {
+            alertDialog("Error", "Username cannot be empty.");
+            return;
+        }
+
+        if (email.isBlank() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            alertDialog("Error", "Invalid email or cannot be empty.");
+            return;
+        }
+
+        if (country.isBlank()) {
+            alertDialog("Error", "Country cannot be empty.");
+            return;
+        }
+
+        if (city.isBlank()) {
+            alertDialog("Error", "City cannot be empty.");
+            return;
+        }
+
+        if (password.isBlank() || repeatPassword.isBlank()) {
+            alertDialog("Error", "Password cannot be empty.");
+            return;
+        }
+
+        if (!password.equals(repeatPassword)) {
+            alertDialog("Error", "Passwords do not match.");
+            return;
+        }
+
+        if (!checkTerms.isChecked()) {
+            alertDialog("Error", "You must accept the Terms and Conditions.");
+            return;
+        }
+
+        // Asignación de valores después de todas las validaciones
+        u.setName(name);
+        u.setUsername(username);
+        u.setEmail(email);
+        u.setCountry(country);
+        u.setCity(city);
+        u.setPassword(password);
+
+        // Creación del usuario después de pasar todas las validaciones
+        Log.i("Usuario", u.toString());
+        editRestore();
+        userCreated("", "User created");
+
+
+    }
+
+    private void start() {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra(K_USER,u);
+            startActivity(intent);
+    }
+
+    private void editRestore() {
+        userName.setText("");
+        userUsername.setText("");
+        userEmail.setText("");
+        userCountry.setText("");
+        userCity.setText("");
+        userPassword.setText("");
+        userRepeatPassword.setText("");
+        checkTerms.setChecked(false);
 
     }
 
@@ -133,9 +166,22 @@ public class NewUser extends AppCompatActivity {
         new AlertDialog.Builder(this)
                 .setTitle(e)
                 .setMessage(s)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         // Acción a realizar cuando el usuario haga clic en "Aceptar"
+                    }
+                })
+                .show();
+    };
+
+    public void userCreated(String e, String s){
+        new AlertDialog.Builder(this)
+                .setTitle(e)
+                .setMessage(s)
+                .setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Acción a realizar cuando el usuario haga clic en "Aceptar"
+                        start();
                     }
                 })
                 .show();

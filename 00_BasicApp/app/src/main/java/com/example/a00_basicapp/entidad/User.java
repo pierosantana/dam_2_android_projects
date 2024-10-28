@@ -1,8 +1,9 @@
 package com.example.a00_basicapp.entidad;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
     String name;
     String username;
     String email;
@@ -15,11 +16,11 @@ public class User {
     @Override
     public String toString() {
         return "com.example.a00_basicapp.entidad.User{" +
-                "city='" + city + '\'' +
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", country='" + country + '\'' +
+                "city='" + city + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

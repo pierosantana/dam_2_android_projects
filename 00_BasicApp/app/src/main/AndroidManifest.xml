@@ -13,6 +13,9 @@
         android:theme="@style/Theme._00_BasicApp"
         tools:targetApi="31">
         <activity
+            android:name=".userPanel"
+            android:exported="false" />
+        <activity
             android:name=".NewUser"
             android:exported="false" />
         <activity

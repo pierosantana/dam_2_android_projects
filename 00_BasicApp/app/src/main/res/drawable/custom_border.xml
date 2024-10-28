@@ -10,7 +10,7 @@
         android:color="#93676767" /> <!-- Color del borde -->
 
     <!-- Esquinas redondeadas -->
-    <corners android:radius="40dp" />
+    <corners android:radius="20dp" />
 
     <!-- Espacio interno (padding) -->
     <padding
