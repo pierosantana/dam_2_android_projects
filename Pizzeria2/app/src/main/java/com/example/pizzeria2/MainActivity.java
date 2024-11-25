@@ -1,3 +1,4 @@
+
 package com.example.pizzeria2;
 
 import android.content.Intent;
@@ -26,22 +27,72 @@ public class MainActivity extends AppCompatActivity {
     private Button botonLogin;
 
     private GestorUsuario gestorUsuario;
+
+    private TextView mensaje;
+
+    private String mensajeUsuario;
     public static final String K_USUARIO = "usuario";
+
+    private final static String CLAVE_MENSAJE = "CLAVE_MENSAJE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
         gestorUsuario = new GestorUsuario();
         nombre = findViewById(R.id.Nombre);
         password = findViewById((R.id.Password));
-
         botonLogin = findViewById(R.id.botonLogin);
+        mensaje = findViewById(R.id.mensaje);
+
+        if(savedInstanceState!=null){
+            mensajeUsuario = savedInstanceState.getString(CLAVE_MENSAJE);
+        }else {
+            mensajeUsuario = "";
+        }
+
+        mensaje.setText(mensajeUsuario);
+
+        botonLogin.setOnClickListener(view -> {
+            Usuario u = new Usuario();
+            u.setNombre(nombre.getText().toString());
+            u.setPassword(password.getText().toString());
+
+            u = gestorUsuario.validarUsuario(u);
+
+            if(u != null){
+                Intent intent = new Intent(MainActivity.this, PizzeriaActivity.class);
+                intent.putExtra(K_USUARIO, u);
+                startActivity(intent);
+
+            }else{
+                mensajeUsuario = "Usuario o contraseña incorrectos";
+                mensaje.setText(mensajeUsuario);
+            }
+
+        });
+
+
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        Log.d("MainActivity", "onSaveInstanceState()");
+        outState.putString(CLAVE_MENSAJE, mensajeUsuario);
+    }
+
+
+
+}
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("MainActivity", "onStart()");
 
         botonLogin.setOnClickListener(view -> {
             Usuario u = new Usuario();
@@ -58,7 +109,42 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
-
-
     }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("MainActivity", "onRestart()");
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MainActivity", "onResume()");
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("MainActivity", "onPause()");
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity", "onStop()");
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("MainActivity", "onDestroy()");
+    }
+
+
 }
