@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioGroup;
@@ -27,44 +26,30 @@ import java.util.ArrayList;
 
 public class PizzeriaActivity extends AppCompatActivity {
     public final static String K_USUARIO = "usuario";
+    private CheckBox ingrediente1;
+    private CheckBox ingrediente2;
+    private CheckBox ingrediente3;
+    private CheckBox ingrediente4;
+    private CheckBox ingrediente5;
+    private CheckBox ingrediente6;
+    private CheckBox ingrediente7;
+    private CheckBox ingrediente8;
+    private CheckBox ingrediente9;
 
-    Pizza pizza = new Pizza();
+
+    Pizza pizza;
     ArrayList<Ingrediente> listaIngrediente;
-    GestorPizza gp = new GestorPizza();
-    CheckBox ingrediente1;
-    CheckBox ingrediente2;
-    CheckBox ingrediente3;
-    CheckBox ingrediente4;
-    CheckBox ingrediente5;
-    CheckBox ingrediente6;
-    CheckBox ingrediente7;
-    CheckBox ingrediente8;
-    CheckBox ingrediente9;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Usuario usuario = (Usuario) getIntent().getSerializableExtra(MainActivity.K_USUARIO);
+        Log.d("PizzeriaActivity", "usuario".toString());
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_pizzeria);
 
-        Usuario usuario = (Usuario)getIntent().getSerializableExtra(K_USUARIO);
-        if (usuario != null) {
-            String uNombre = usuario.getNombre();
-            String uDireccion = usuario.getDireccion();
+        RadioGroup rg = findViewById(R.id.GrupoRadio);
 
-            TextView nombreTextView = findViewById(R.id.nombre);
-            TextView direccionTextView = findViewById(R.id.direccion);
-
-            nombreTextView.setText(uNombre);
-            direccionTextView.setText(uDireccion);
-
-            Log.d("PizzeriActivity", usuario.toString());
-        } else {
-            Log.d("PizzeriActivity", "Usuario no encontrado en el Intent");
-        }
-
-        // Inicializar las vistas despues de setContentView
         ingrediente1 = findViewById(R.id.JamonYork);
         ingrediente2 = findViewById(R.id.Bacon);
         ingrediente3 = findViewById(R.id.Carne);
@@ -75,15 +60,25 @@ public class PizzeriaActivity extends AppCompatActivity {
         ingrediente8 = findViewById(R.id.Maiz);
         ingrediente9 = findViewById(R.id.Pinia);
 
-        RadioGroup rg = findViewById(R.id.grupoRadio);
-
         Button pedirPizza = findViewById(R.id.hacerPedido);
-
+        //nombreUsuario = findViewById(R.id.nombre);
+        // direccionUsuario = findViewById(R.id.direccion);
         Intent intent = getIntent();
-
         String nombre = intent.getStringExtra("nombre");
         String direccion = intent.getStringExtra("direccion");
+        // nombreUsuario.setText(usuario.getNombre());
+        // direccionUsuario.setText(direccion);
+        GestorPizza gp = new GestorPizza();
+        pizza = new Pizza();
+        pedirPizza.setOnClickListener(view -> {
+            Log.i("PizzeriaActivity", String.valueOf(pizza));
+            listaIngrediente = new ArrayList<>();
+            pizza.setListaIngrediente(listaIngrediente);
+            agregarIngrediente(pizza);
+            Log.i("PizzeriaActivity", String.valueOf(pizza));
+            Log.i("PizzeriaActivity", String.valueOf(pizza.getPrecio()));
 
+        });
 
         rg.setOnCheckedChangeListener((group, checkedId) -> {
             if (checkedId == R.id.radio1) {
@@ -91,75 +86,17 @@ public class PizzeriaActivity extends AppCompatActivity {
             }
             if (checkedId == R.id.radio2) {
                 pizza.setTamanioPizza(Tamanio.MEDIANO);
-
             }
             if (checkedId == R.id.radio3) {
                 pizza.setTamanioPizza(Tamanio.GRANDE);
             }
-
-            Log.i("PizzeriaActivity", String.valueOf(pizza));
-
         });
 
-
-        pedirPizza.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Log.i("PizzeriaActivity", String.valueOf(pizza));
-
-                agregarIngrediente(pizza);
-                Log.i("PizzeriaActivity", String.valueOf(pizza));
-                //obtenerTamañoPizza(rg);
-
-                //pizza.setTamanioPizza(Tamanio.values()[obtenerTamañoPizza(rg)]);
-                gp.calcularPizza(pizza);
-
-                Log.i("PizzeriaActivity", String.valueOf(pizza.getPrecio()));
-
-                usuario.setPizza(pizza);
-
-                Log.i("PizzeriaActivity", String.valueOf(usuario));
-
-                Intent intent = new Intent(PizzeriaActivity.this, Confirmacion.class);
-                intent.putExtra(K_USUARIO, usuario);
-                startActivity(intent);
-
-
-            }
-        });
-
-
-
+        gp.calcularPizza(pizza);
 
     }
-
-    /*
-    private int obtenerTamañoPizza(RadioGroup rg) {
-
-        final int[] n = {1};
-
-        rg.setOnCheckedChangeListener((group, checkedId) -> {
-            if (checkedId == R.id.radio1) {
-                n[0] = 0;
-
-            }
-            if (checkedId == R.id.radio2) {
-                n[0] = 1;
-
-            }
-            if(checkedId == R.id.radio3) {
-                n[0] = 2;
-            }
-        });
-        return n[0];
-    }
-
-     */
-
 
     public void agregarIngrediente(Pizza pizza) {
-        listaIngrediente = new ArrayList<>();
-        pizza.setListaIngrediente(listaIngrediente);
         if (ingrediente1.isChecked()) pizza.agregarIngrediente(new Ingrediente("Jamón York", 1));
         if (ingrediente2.isChecked()) pizza.agregarIngrediente(new Ingrediente("Bacon", 1));
         if (ingrediente3.isChecked()) pizza.agregarIngrediente(new Ingrediente("Carne", 1));
@@ -170,5 +107,4 @@ public class PizzeriaActivity extends AppCompatActivity {
         if (ingrediente8.isChecked()) pizza.agregarIngrediente(new Ingrediente("Maíz", 3));
         if (ingrediente9.isChecked()) pizza.agregarIngrediente(new Ingrediente("Piña", 3));
     }
-
 }

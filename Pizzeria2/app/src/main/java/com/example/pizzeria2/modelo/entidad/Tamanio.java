@@ -1,7 +1,5 @@
 package com.example.pizzeria2.modelo.entidad;
 
-import java.io.Serializable;
-
-public enum Tamanio implements Serializable {
+public enum Tamanio {
     PEQUENO, MEDIANO, GRANDE;
 }
