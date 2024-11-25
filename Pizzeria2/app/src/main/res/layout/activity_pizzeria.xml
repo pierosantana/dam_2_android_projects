@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img"
-        android:alpha="0.3" />
-
+    tools:context=".PizzeriaActivity">
 
     <LinearLayout
         android:id="@+id/main"
@@ -26,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pizzeria Piero"
+            android:text="Dominos"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="53sp"
@@ -50,6 +41,7 @@
                 />
             <TextView
                 android:id="@+id/nombre"
+                android:text=""
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
@@ -72,8 +64,10 @@
                 />
             <TextView
                 android:id="@+id/direccion"
+                android:text=""
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +83,7 @@
                 android:textColor="@color/black"
                 />
             <RadioGroup
-                android:id="@+id/GrupoRadio"
+                android:id="@+id/grupoRadio"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >
@@ -273,4 +267,4 @@
 
     </LinearLayout>
 
-</FrameLayout>
+</LinearLayout>

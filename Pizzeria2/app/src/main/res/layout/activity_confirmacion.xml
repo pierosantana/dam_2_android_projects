@@ -1,48 +1,83 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Confirmacion">
+
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:gravity="center">
 
     <TextView
-        android:id="@+id/tvNombreUsuario"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre: "
-        android:textSize="18sp" />
+        android:text="DATOS DEL PEDIDO"
+        android:textAlignment="center"
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvDireccionUsuario"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dirección: "
-        android:textSize="18sp" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/tvTamanioPizza"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tamaño de la Pizza: "
-        android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tvIngredientes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredientes: "
-        android:textSize="18sp" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dNombre"/>
 
-    <TextView
-        android:id="@+id/tvPrecioFinal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Precio Final: "
-        android:textSize="18sp" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnPedidoProcesado"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pedido Procesado" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dirección:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dDireccion"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pizza:"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dPizza"/>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -3,7 +3,7 @@ package com.example.pizzeria2.modelo.entidad;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Ingrediente  implements Serializable {
+public class Ingrediente implements Serializable {
     private String nombre;
     private double precio;
 

@@ -20,7 +20,8 @@
 
         <activity
             android:name=".PizzeriaActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Pizzeria2"/>
 
         <activity
             android:name=".MainActivity"

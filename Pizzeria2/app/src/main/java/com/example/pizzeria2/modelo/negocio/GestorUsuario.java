@@ -6,13 +6,15 @@ import com.example.pizzeria2.modelo.persistencia.DaoUsuario;
 public class GestorUsuario {
     private DaoUsuario daoUsuario ;
 
-    public int validarUsuario(Usuario u){
+    public Usuario validarUsuario(Usuario u){
         daoUsuario = new DaoUsuario();
-        if(daoUsuario.getUsuarioByName(u)){
-            return 1;
+        if(daoUsuario.validarUsuarioByName(u)){
+            return daoUsuario.getUsuarioByName(u);
         }else{
-            return 0;
+            return null;
         }
+
+
 
     }
 

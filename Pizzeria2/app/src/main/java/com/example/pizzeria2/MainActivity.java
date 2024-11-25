@@ -1,4 +1,3 @@
-
 package com.example.pizzeria2;
 
 import android.content.Intent;
@@ -127,66 +126,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putString(CLAVE_MENSAJE, mensajeUsuario);
     }
 
-
-
-}
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d("MainActivity", "onStart()");
-
-        botonLogin.setOnClickListener(view -> {
-            Usuario u = new Usuario();
-            u.setNombre(nombre.getText().toString());
-            u.setPassword(password.getText().toString());
-            if(gestorUsuario.validarUsuario(u)==1){
-                Intent intent = new Intent(MainActivity.this, PizzeriaActivity.class);
-                intent.putExtra(K_USUARIO, u);
-                startActivity(intent);
-
-            }else{
-                Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-            }
-
-
-        });
-    }
-
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.d("MainActivity", "onRestart()");
-    }
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d("MainActivity", "onResume()");
-    }
-
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d("MainActivity", "onPause()");
-    }
-
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("MainActivity", "onStop()");
-    }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d("MainActivity", "onDestroy()");
-    }
 
 
 }
