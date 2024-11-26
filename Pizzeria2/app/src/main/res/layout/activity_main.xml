@@ -14,28 +14,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="LOGIN"
+            android:text="NAPOLES PIZZA"
             android:textAlignment="center"
             android:textSize="32sp"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
         <EditText
-            android:id="@+id/Nombre"
+            android:id="@+id/usuarioLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del cliente"
+            android:hint="usuario"
             android:inputType="text"
             android:paddingTop="20dp"
+            android:paddingLeft="10dp"
             android:textColorHint="#070707"
             android:textStyle="italic"
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:paddingLeft="10dp"
+            android:hint="contraseña"
             android:inputType="textPassword"
             android:paddingTop="20dp"
             android:textColorHint="#070707"
@@ -56,7 +58,25 @@
             android:id="@+id/botonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:fontFamily="monospace"
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/black"
+            android:padding="5dp"
             android:text="Pedir Pizza" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="monospace"
+        android:text="Registrar"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:backgroundTint="@color/black"
+        android:id="@+id/mainNewUser"
+        />
 
 
 

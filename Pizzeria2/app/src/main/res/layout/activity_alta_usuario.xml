@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    tools:context=".AltaUsuario">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="NAPOLES PIZZA"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="10sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NUEVO CLIENTE"
+        android:layout_gravity="left"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="monospace"
+        />
+
+    <EditText
+        android:layout_width="1000pt"
+        android:layout_height="22dp"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:layout_marginBottom="20dp"/>
+    "
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="left"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"
+                android:textSize="12dp"
+                android:hint="Nombre"
+                android:textColorHint="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:background="@drawable/custom_border"
+                android:id="@+id/userName"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:minWidth="140dp"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:layout_marginBottom="20dp"
+                android:textSize="12dp"
+                android:hint="Usuario"
+                android:textColorHint="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:background="@drawable/custom_border"
+                android:id="@+id/userUsername"/>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:layout_width="210dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginRight="15dp"
+                android:textSize="12dp"
+                android:hint="Dirección"
+                android:textColorHint="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:inputType="text"
+                android:background="@drawable/custom_border"
+                android:id="@+id/userAddress"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:minWidth="140dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textSize="12dp"
+                android:hint="Ciudad"
+                android:textColorHint="@color/black"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:background="@drawable/custom_border"
+                android:id="@+id/userCity"/>
+
+
+
+
+        </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:minWidth="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="12dp"
+            android:inputType="textPassword"
+            android:hint="Contraseña"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:background="@drawable/custom_border"
+            android:id="@+id/userPassword"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:minWidth="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:textSize="12dp"
+            android:inputType="textPassword"
+            android:hint="Repetir contraseña"
+            android:textColorHint="@color/black"
+            android:textStyle="bold"
+            android:fontFamily="monospace"
+            android:background="@drawable/custom_border"
+            android:id="@+id/userRepeatPassword"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textSize="10dp"
+                android:fontFamily="monospace"
+                android:text="Acepto los terminos y Condiciones."
+                android:id="@+id/checkTerms"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textSize="11dp"
+                android:textStyle="bold"
+                android:text="REGISTRAR"
+                android:backgroundTint="@color/black"
+                android:padding="5dp"
+                android:id="@+id/buttonCreateNewUser"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

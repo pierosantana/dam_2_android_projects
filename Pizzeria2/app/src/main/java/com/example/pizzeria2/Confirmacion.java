@@ -1,46 +1,42 @@
 package com.example.pizzeria2;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.pizzeria2.modelo.entidad.Pizza;
 import com.example.pizzeria2.modelo.entidad.Usuario;
-import com.example.pizzeria2.modelo.negocio.GestorUsuario;
 
 public class Confirmacion extends AppCompatActivity {
 
     public static final String K_USUARIO = "usuario";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmacion);
 
-        Usuario usuario = (Usuario)getIntent().getSerializableExtra(K_USUARIO);
+        // Recuperar el objeto Usuario del Intent
+        Usuario usuario = (Usuario) getIntent().getSerializableExtra(K_USUARIO);
+        if (usuario == null) {
+            // Manejo de error en caso de que el Usuario sea nulo
+            finish(); // Finalizar la actividad si no se pasa un Usuario válido
+            return;
+        }
 
-
-
-        String uNombre = usuario.getNombre();
-        String uDireccion = usuario.getDireccion();
-        Pizza uPizza = usuario.getPizza();
-
+        // Obtener referencias de los TextView
         TextView nombreTextView = findViewById(R.id.dNombre);
         TextView direccionTextView = findViewById(R.id.dDireccion);
         TextView pizzaTextView = findViewById(R.id.dPizza);
-
-        nombreTextView.setText(uNombre);
-        direccionTextView.setText(uDireccion);
-        pizzaTextView.setText(uPizza.toString());
-
-        Intent intent = getIntent();
+        TextView precioTextView = findViewById(R.id.pPizza);
 
 
+        // Asignar los datos del Usuario a los TextView
+        nombreTextView.setText(usuario.getNombre());
+        direccionTextView.setText(usuario.getDireccion());
 
-
+        // Evitar posibles errores si la Pizza es nula
+        Pizza uPizza = usuario.getPizza();
+        pizzaTextView.setText(uPizza != null ? uPizza.toString() : "No especificado");
+        precioTextView.setText(uPizza != null ?  uPizza.getPrecio() + "€" : "No especificado");
     }
 }

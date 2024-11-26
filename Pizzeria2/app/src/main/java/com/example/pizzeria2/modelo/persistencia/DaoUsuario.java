@@ -7,22 +7,16 @@ import com.example.pizzeria2.modelo.entidad.Usuario;
 import java.util.ArrayList;
 
 public class DaoUsuario {
-    ArrayList<Usuario>listaUsuarios;
+    static ArrayList<Usuario>listaUsuarios = new ArrayList<Usuario>();;
 
-    public void registraUsuario(){
-        listaUsuarios = new ArrayList<Usuario>();
-        Usuario usuario1 = new Usuario("Manolo","1234","Calle_Perico");
-        Usuario usuario2 = new Usuario("Pepe","12345","Calle_Doha");
-        Usuario usuario3 = new Usuario("Daniel","123456","Calle_Lituania");
-        listaUsuarios.add(usuario1);
-        listaUsuarios.add(usuario2);
-        listaUsuarios.add(usuario3);
+    public void registraUsuario(Usuario u){
+
+        listaUsuarios.add(u);
 
     }
     public Boolean validarUsuarioByName(Usuario u){
-        registraUsuario();
        for(Usuario user : listaUsuarios){
-           if(user.equals(u)){
+           if(user.sonIguales(u)){
                return true;
            }
        }
@@ -31,9 +25,8 @@ public class DaoUsuario {
     }
 
     public Usuario getUsuarioByName(Usuario u){
-        registraUsuario();
         for(Usuario user : listaUsuarios){
-            if(user.equals(u)){
+            if(user.sonIguales(u)){
                 return user;
             }
         }

@@ -38,10 +38,7 @@ public class Ingrediente implements Serializable {
 
     @Override
     public String toString() {
-        return "Ingrediente{" +
-                "nombre='" + nombre + '\'' +
-                ", precio=" + precio +
-                '}';
+        return "\n " + nombre + " " + precio + "€" ;
     }
 
     public Ingrediente(String nombre, double precio) {

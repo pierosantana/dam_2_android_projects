@@ -5,12 +5,24 @@ import java.util.Objects;
 
 public class Usuario implements Serializable {
     private String nombre;
+
+    private String username;
     private String password;
     private String direccion;
     private Pizza pizza;
 
+
+
     public Usuario() {
 
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getNombre() {
@@ -52,26 +64,20 @@ public class Usuario implements Serializable {
                 ", password='" + password + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", pizza=" + pizza +
+                ", username='" + username + '\'' +
                 '}';
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean sonIguales(Object o) {
         Usuario usuario = (Usuario) o;
-        return Objects.equals(nombre, usuario.nombre) && Objects.equals(password, usuario.password);
+        if(usuario.getUsername().equalsIgnoreCase(username) && usuario.getPassword().equals(password)){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nombre, password, direccion, pizza);
-    }
-
-    public Usuario(String nombre, String password, String direccion) {
-        this.nombre = nombre;
-        this.password = password;
-        this.direccion = direccion;
-
+        return Objects.hash(nombre, password, direccion, pizza, username);
     }
 }

@@ -3,6 +3,7 @@ package com.example.pizzeria2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,16 +21,20 @@ import com.example.pizzeria2.modelo.persistencia.DaoUsuario;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText nombre ;
+    private EditText usuario ;
     private EditText password;
 
     private Button botonLogin;
 
     private GestorUsuario gestorUsuario;
 
+    Usuario u;
+
     private TextView mensaje;
 
     private String mensajeUsuario;
+
+    Button buttonNewUser;
     public static final String K_USUARIO = "usuario";
 
     private final static String CLAVE_MENSAJE = "CLAVE_MENSAJE";
@@ -39,11 +44,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        u = new Usuario();
+
+        u = (Usuario)getIntent().getSerializableExtra(K_USUARIO);
+
+
+
         gestorUsuario = new GestorUsuario();
-        nombre = findViewById(R.id.Nombre);
-        password = findViewById((R.id.Password));
+
+
+        usuario = findViewById(R.id.usuarioLogin);
+        password = findViewById((R.id.password));
         botonLogin = findViewById(R.id.botonLogin);
         mensaje = findViewById(R.id.mensaje);
+
+        buttonNewUser = findViewById(R.id.mainNewUser);
+
+
+        if(u != null){
+            Log.i("MainActivity",u.toString());
+            usuario.setText(u.getUsername());
+            password.setText(u.getPassword());
+
+        }else {
+            Log.i("MainActivity","------- No hay usuario.");
+        }
+
 
         if(savedInstanceState!=null){
             mensajeUsuario = savedInstanceState.getString(CLAVE_MENSAJE);
@@ -53,19 +79,32 @@ public class MainActivity extends AppCompatActivity {
 
         mensaje.setText(mensajeUsuario);
 
+        buttonNewUser = findViewById(R.id.mainNewUser);
+
+        buttonNewUser.setOnClickListener(v -> {
+            newUser(v);
+        });
+
+
 
 
     }
+
 
     @Override
     protected void onStart() {
         super.onStart();
         Log.d("MainActivity", "onStart()");
 
+
+
+
+
         botonLogin.setOnClickListener(view -> {
-            Usuario u = new Usuario();
-            u.setNombre(nombre.getText().toString());
+            u = new Usuario();
+            u.setUsername(usuario.getText().toString());
             u.setPassword(password.getText().toString());
+
 
             u = gestorUsuario.validarUsuario(u);
 
@@ -124,6 +163,14 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("MainActivity", "onSaveInstanceState()");
         outState.putString(CLAVE_MENSAJE, mensajeUsuario);
+    }
+
+    private void newUser(View view) {
+        Intent intent = new Intent(this, AltaUsuario.class);
+        if(u != null){
+            Log.i("Usuario",u.toString());
+        }
+        startActivity(intent);
     }
 
 
